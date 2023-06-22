@@ -1,0 +1,74 @@
+Node* reverse(Node* head)
+{
+    Node*curr=head;
+    Node*prev=NULL;
+   Node*temp=NULL;
+
+  if(head==NULL || head->next==NULL)
+  {
+      return head;
+  }
+
+
+    while(curr!=NULL)
+    {
+        temp=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=temp;
+        
+    }
+    head=prev;
+    return head ;
+}
+
+Node* remove(Node* head,int K)
+{
+    head=reverse(head);
+    Node* temp=head;
+
+  
+    int count=1;
+    while(count!=K-1)
+    {
+      temp=temp->next;
+      count++ ;
+    }
+
+    temp->next=temp->next->next;
+
+    head=reverse(head);
+    return head;
+}
+
+Node* removeKthNode(Node* head, int K)
+{
+    // Write your code here.
+  
+      if(K==1 )
+    {
+        if (head->next == NULL) {
+          return NULL;
+        }
+
+        else if(head->next->next==NULL)
+        {
+            head->next=NULL;
+            return head;
+        }
+
+        else
+        {
+           head= reverse(head);
+           head=head->next;
+           return reverse(head);
+        }
+    }
+
+
+
+   return remove(head,K);
+  
+   
+  
+}
